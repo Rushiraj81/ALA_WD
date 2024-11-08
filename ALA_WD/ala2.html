@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex JavaScript Animation</title>
+  <style>
+    #animate {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      opacity: 1;
+    }
+    
+  </style>
+</head>
+<body>
+
+<div id="animate"></div>
+
+<button onclick="startComplexAnimation()">Start Complex Animation</button>
+
+<script>
+  
+  function startComplexAnimation() {
+    var elem = document.getElementById("animate");
+    var posX = 0;
+    var posY = 0;
+    var angle = 0;
+    var scale = 1;
+    var opacity = 1;
+    var id = setInterval(frame, 10); 
+
+    function frame() {
+      if (posX >= 300 || posY >= 300) {  
+        clearInterval(id);
+      } else {
+        posX++;  // Move right
+        posY++;  // Move down
+        angle += 2;  // Rotate
+        scale += 0.005;  // Slightly increase size
+        opacity -= 0.002;  // Fade out
+
+        
+        elem.style.left = posX + 'px';
+        elem.style.top = posY + 'px';
+        elem.style.transform = `rotate(${angle}deg) scale(${scale})`;
+        elem.style.opacity = opacity;
+
+        
+        var colorValue = posX % 255;  // Change based on position
+        elem.style.backgroundColor = `rgb(${colorValue}, 100, 150)`;
+      }
+    }
+  }
+</script>
+<script>
+  function goBack() {
+      window.history.back();
+  }
+</script>
+
+<style>
+  #backBtn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+  }
+</style>
+<button onclick="goBack()" id="backBtn">Go Back</button>
+
+
+</body>
+</html>
